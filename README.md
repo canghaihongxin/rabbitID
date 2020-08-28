@@ -18,3 +18,102 @@
 
 # 使用方法
 
+第一步： 添加依赖
+
+
+
+`````` <dependency>
+
+		 <dependency>
+            <groupId>com.bdf</groupId>
+            <artifactId>rabbitId</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+``````
+
+
+
+第二步： 添加配置
+
+
+
+```java
+package com.budongfeng.tboot.config.rabbitid;
+
+import com.bdf.rabbitId.BufferAllocatorTemplate;
+import com.bdf.rabbitId.cache.RedisClient;
+import com.bdf.rabbitId.model.IdStore;
+import com.bdf.rabbitId.utils.RedisConnectionFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
+
+/**
+ * description: 配置RabbitID
+ * author: 田培融
+ * date: 2020-08-28 11:15
+ */
+@Component
+public class RabbitIDConfig implements CommandLineRunner {
+
+
+    @Override
+    public void run(String... args) throws Exception {
+
+
+        RedisConnectionFactory.RedisProperties properties = new RedisConnectionFactory.RedisProperties();
+        properties.setHost("192.168.4.26");
+        properties.setDatabase(3);
+        properties.setPort(6379);
+        properties.setPassword("");
+        properties.setPrefix("id");
+        RedisConnectionFactory factory =  RedisConnectionFactory.with(properties).build();
+
+        RedisClient redisClient = new RedisClient();
+        redisClient.setRedisClientFactory( () -> {
+            Jedis jedis = factory.getJedisConnection();
+            jedis.select(3);
+            return jedis;
+        });
+        /**
+         * @description:  配置id 
+         * @author: 田培融
+         * @date: 2020/8/28 14:19
+          * @param args	 id 名称  step 申请号段步长   factor 申请号段因子   wasteQuota 损耗额度
+         */
+        BufferAllocatorTemplate.start(redisClient).build(new IdStore().setKey("user_id").setStep(1000).setFactor(30).setWasteQuota(10));
+        BufferAllocatorTemplate.start(redisClient).build(new IdStore().setKey("order_id").setStep(1000).setFactor(30).setWasteQuota(10));
+    }
+}
+
+```
+
+
+
+第三步： 使用
+
+
+
+```java
+  /**
+     * @description:  通过RabbitID 获取id
+     * @author: 田培融
+     * @date: 2020/8/28 13:06
+     */
+    @GetMapping("/id")
+    @ResponseBody
+    public String getId() {
+        BufferAllocator allocator = BufferAllocatorTemplate.getAllocator("user_id");
+        com.bdf.rabbitId.model.Result res = allocator.get();
+        if (res.isSuccess()) {
+            System.out.println(res.getId());
+        }
+        return String.valueOf(res.getId());
+    }
+```
+
