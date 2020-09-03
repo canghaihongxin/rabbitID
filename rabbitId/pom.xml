@@ -6,7 +6,38 @@
 
     <groupId>com.budongfeng</groupId>
     <artifactId>rabbitId</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <url>https://github.com/canghaihongxin/rabbitID</url>
+    <description>RabbitID 分布式的高性能ID生成器</description>
+    <name>RabbitID</name>
+    <licenses>
+        <!-- MIT许可证 -->
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+        <!-- Apache许可证 -->
+        <!-- <license>
+                <name>The Apache Software License, Version 2.0</name>
+                <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            </license> -->
+    </licenses>
+    <developers>
+        <developer>
+            <name>tianpeirong</name>
+            <email>canghaihongxin@163.com</email>
+            <url>http://www.budongfeng.com</url>
+        </developer>
+    </developers>
+
+
+    <scm>
+        <tag>master</tag>
+        <url>https://github.com/canghaihongxin/rabbitID</url>
+        <connection>https://github.com/canghaihongxin/rabbitID.git</connection>
+    </scm>
+
 
     <properties>
         <java.version>1.8</java.version>
@@ -60,5 +91,90 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>rabbidId</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+<!--                    要生成Javadoc和Source jar文件，您必须配置javadoc和源Maven插件-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                    <!--  必须配置GPG插件用于使用以下配置对组件进行签名 -->
+                    <!-- GPG -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <!-- 这个id需要在setting.xml中设置  -->
+                    <id>rabbitId</id>
+                    <name>wenlianggong</name>
+                    <!-- 这里的url就是Issue中回复的snapshots 的repo地址-->
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>rabbitId</id>
+                    <name>wenlianggong</name>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>

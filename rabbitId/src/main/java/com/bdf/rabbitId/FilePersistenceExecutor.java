@@ -32,8 +32,7 @@ public class FilePersistenceExecutor {
 
     /**
      * 保存当前ID生成器镜像副本，以便下次启动进行恢复
-     * @param allocatorMap
-     * @throws Exception
+     * @param allocatorMap ID分配器集合
      */
     public void put(Map<String, BufferAllocator> allocatorMap) throws Exception {
         log.info(System.getProperty("user.dir"));

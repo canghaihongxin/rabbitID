@@ -7,10 +7,7 @@ import redis.clients.jedis.Protocol;
 import redis.clients.util.Pool;
 
 /**
- * @Description: ${todo}(用一句话描述该文件做什么)
- * @Version: 1.0
  * @author: Gordon
- * @date: 2019-08-08
  */
 public class RedisConnectionFactory {
     private JedisShardInfo shardInfo;

@@ -8,7 +8,6 @@ import static java.util.concurrent.TimeUnit.*;
 
 /**
  * @author YangGuodong
- * @date: 2019-08-21
  */
 public class StopWatch {
     /** Name of the current task */
@@ -48,7 +47,7 @@ public class StopWatch {
     /**
      * Creates (but does not start) a new stopwatch using {@link System#nanoTime}
      * as its time source.
-     *
+     * @return StopWatch
      */
     public static StopWatch createUnstarted() {
         return new StopWatch();
@@ -57,7 +56,7 @@ public class StopWatch {
     /**
      * Creates (and starts) a new stopwatch using {@link System#nanoTime}
      * as its time source.
-     * @return
+     * @return  StopWatch
      */
     public static StopWatch createStarted(){
         return new StopWatch().start();
@@ -68,6 +67,7 @@ public class StopWatch {
      * or timing methods are called without invoking this method.
      * @param taskName the name of the task to start
      * @see #stop()
+     * @return StopWatch
      */
     public StopWatch start(String taskName) throws IllegalStateException {
         Assert.checkState(!isRunning, "This stopwatch is already running.");
@@ -112,17 +112,18 @@ public class StopWatch {
         return isRunning ? ticker.read() - startTick + elapsedNanos : elapsedNanos;
     }
 
-    /**
-     * Returns the current elapsed time shown on this stopwatch, expressed
-     * in the desired time unit, with any fraction rounded down.
-     *
-     * <p>Note that the overhead of measurement can be more than a microsecond, so
-     * it is generally not useful to specify {@link TimeUnit#NANOSECONDS}
-     * precision here.
-     */
-    public long elapsed(TimeUnit desiredUnit) {
-        return desiredUnit.convert(elapsedNanos(), NANOSECONDS);
-    }
+//    /**
+//     * Returns the current elapsed time shown on this stopwatch, expressed
+//     * in the desired time unit, with any fraction rounded down.
+//     *
+//     * <p>Note that the overhead of measurement can be more than a microsecond, so
+//     * it is generally not useful to specify {@link TimeUnit#NANOSECONDS}
+//     * precision here.
+//     * @return use time
+//     */
+//    public long elapsed(TimeUnit desiredUnit) {
+//        return desiredUnit.convert(elapsedNanos(), NANOSECONDS);
+//    }
 
 
     @Override public String toString() {

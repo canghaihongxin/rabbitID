@@ -57,10 +57,10 @@ public class BufferPaddingExecutor {
 
 
     /**
-     * 通过分布式进行号段申请
-     * @param allocator 分配器
-     * @param pos 当前Segment索引
-     * @throws IdGeneratorException
+     *  通过分布式进行号段申请
+     * @author 田培融
+      * @param allocator 分配器缓存类
+     * @param pos 号段下标
      */
     public void updateAllocator(BufferAllocator allocator, int pos) throws IdGeneratorException {
         StopWatch stopWatch = StopWatch.createUnstarted().start(allocator.getKey());

@@ -164,7 +164,7 @@ public class BufferAllocator implements IdGenerator {
     }
 
     /**
-     * @description:  修改号段Buffer当前号段索引 ，申请到的最大号段值，需要损耗的值
+     *  修改号段Buffer当前号段索引 ，申请到的最大号段值，需要损耗的值
      */
     public void combineSegmentBuffer(Integer pos, long max, int wasteQuota){
         if(null != pos) {
