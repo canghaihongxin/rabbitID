@@ -18,15 +18,9 @@
 
 1. 框架依赖于redis，这一点完全也可抽离出来，可以使用zk，或者mq。  这里面大概又会用到工厂模式和建造者模式，要对持久化进行解耦。  预计今年十一月开始开发。。。。。。
 
-# 核心流程讲解
-
-![免子ID生成器获取ID流程](https://img-blog.csdnimg.cn/20200807085318227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTEyOTYxNjU=,size_16,color_FFFFFF,t_70)
-
-此图加载如果慢的话可以看我的博客 https://blog.csdn.net/u011296165/article/details/107854375
-
 
 # 性能
-在本地电脑跑了跑10万个ID大约是在7秒左右。
+在本地电脑跑了跑10万个ID大约是在6秒左右。
 
 # 使用方法
 
@@ -34,12 +28,11 @@
 
 
 
-`````` <dependency>
-
-		 <dependency>
-            <groupId>com.bdf</groupId>
+``````
+        <dependency>
+            <groupId>com.budongfeng</groupId>
             <artifactId>rabbitId</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
@@ -52,7 +45,7 @@
 
 第二步： 添加配置
 
-
+注： 这里并不是强依赖于springboot，只是RabbitId在启动程序的时候需要启动构建，如果使用spring的时候也只是需要让应用一启动的时候执行 `run`方法中的代码就可以了。
 
 ```java
 package com.budongfeng.tboot.config.rabbitid;
