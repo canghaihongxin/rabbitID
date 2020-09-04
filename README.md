@@ -26,7 +26,7 @@
 
 
 # 性能
-在本地电脑跑了跑10万个ID大约是在7秒左右。
+在本地电脑跑了跑10万个ID大约是在6秒左右。
 
 # 使用方法
 
@@ -34,12 +34,11 @@
 
 
 
-`````` <dependency>
-
-		 <dependency>
-            <groupId>com.bdf</groupId>
+``````
+        <dependency>
+            <groupId>com.budongfeng</groupId>
             <artifactId>rabbitId</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
