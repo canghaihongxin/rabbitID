@@ -45,7 +45,7 @@
 
 第二步： 添加配置
 
-
+注： 这里并不是强依赖于springboot，只是RabbitId在启动程序的时候需要启动构建，如果使用spring的时候也只是需要让应用一启动的时候执行 `run`方法中的代码就可以了。
 
 ```java
 package com.budongfeng.tboot.config.rabbitid;
