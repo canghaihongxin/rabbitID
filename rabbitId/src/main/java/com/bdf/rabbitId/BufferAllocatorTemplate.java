@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class BufferAllocatorTemplate {
 
-    private static BufferAllocatorTemplate instance = null;
+    private static volatile BufferAllocatorTemplate instance = null;
 
     private Map<String, BufferAllocator> allocatorMap = new ConcurrentHashMap<>();
     private FilePersistenceExecutor filePersistenceExecutor;
