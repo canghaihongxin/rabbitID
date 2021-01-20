@@ -25,6 +25,11 @@
 
 已经经过生产环境应用，大家可以使用
 
+# 联系作者
+
+微信号：canghaihongxin
+邮箱: canghaihongxin@163.com
+
 # 使用方法
 
 第一步： 添加依赖
@@ -124,4 +129,6 @@ public class RabbitIDConfig implements CommandLineRunner {
         return String.valueOf(res.getId());
     }
 ```
+
+
 
